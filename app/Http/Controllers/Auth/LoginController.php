@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -36,4 +37,21 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function authenticated(Request $request)
+        {
+            // Logic that determines where to send the user
+            if($request->user()->hasRole('admin'))
+                {
+                    return redirect()->intended(route('home.admin'));
+                }
+            if($request->user()->hasRole('super'))
+                {
+                    return redirect()->intended(route('home.admin'));
+                }
+            if($request->user()->hasRole('officer'))
+                {
+                    return redirect()->intended(route('home.officer'));
+                }
+        }
 }

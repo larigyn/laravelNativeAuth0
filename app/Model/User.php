@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany('App\Model\Role')
+        return $this->belongsToMany(Role::class)
                     ->withTimestamps();
     }
 
@@ -64,8 +64,5 @@ class User extends Authenticatable
           return false;
         }
 
-    // public function isRole()
-    //     {
-    //       return $this->role; // mysql table column
-    //     }
+    
 }
