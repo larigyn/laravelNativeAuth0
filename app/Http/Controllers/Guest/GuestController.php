@@ -1,28 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Officer;
+namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class OfficerController extends Controller
+class GuestController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'checkrole:officer']);
-        // $this->middleware('checkrole:officer');
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'checkrole:guest']);
+        // $this->middleware('checkrole:guest');
+    }
+
     public function index()
     {
-        //
-        return view('officer.home_officer');
+        //base view for the admin area_gcj
+        return view('guest.home_guest');
     }
 
     /**

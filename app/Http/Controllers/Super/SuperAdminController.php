@@ -8,19 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class SuperAdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('checkrole:superadmin');
+        $this->middleware(['auth','checkrole:super']);
+        // $this->middleware('checkrole:super');
     }
+
     public function index()
     {
-        ////base view for the super admin area_gcj
+        
         return view('super.home_superadmin');
 
     }

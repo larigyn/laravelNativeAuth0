@@ -14,6 +14,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
     }
 
     /**
@@ -21,8 +22,30 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        // $request->user()->authorizeRoles(['Admin', 'Super']);
+        // return view('home');
+        if($request->user()->hasRole('admin'))
+            {                    
+                return redirect()->route('admin.index');
+            }
+        if($request->user()->hasRole('super'))
+            {
+                return redirect()->route('super.index');
+            }
+        if($request->user()->hasRole('officer'))
+            {
+                return redirect()->route('officer.index');
+            }
+        if($request->user()->hasRole('guest'))
+            {
+                return redirect()->route('guest.index');
+            }
+                // return redirect()->intended('/welcome');
+                return redirect()->back();
+                // return redirect()->route('home');
+
+
     }
 }

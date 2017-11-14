@@ -14,25 +14,20 @@
 Route::get('/', function () {
 	return view('welcome');
 });
-/*
-Auth::routes();*/
+
+// Auth::routes();
 
 
 Route::group(['middleware' => 'preventBackHistory'],function(){
 	Auth::routes();
-	Route::get('/home', 'HomeController@index')->name('home');
-	Route::get('/admin', 'Admin\AdminController@index')->name('home.admin');
-	Route::get('/super', 'Super\SuperAdminController@index')->name('home.super');
-	Route::get('/officer', 'Officer\OfficerController@index')->name('home.officer');
+	Route::get('/admin', 'Admin\AdminController@index')->name('admin.index');
+	Route::get('/super', 'Super\SuperAdminController@index')->name('super.index');
+	Route::get('/officer', 'Officer\OfficerController@index')->name('officer.index');
+	Route::get('/guest', 'Guest\GuestController@index')->name('guest.index');
+	Route::get('/home', 'HomeController@index')->name('home');	
 	
 });
 
-/*Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
- Route::get('/','adminController@index');
-});*/
-
-/*Route::group(['middleware' => 'checkrole'],function(){
-	Auth::routes();
-	Route::get('/home', 'HomeController@index')->name('home');
-	Route::get('/', 'Admin\AdminController@index')->name('home.admin');
+/*Route::group(['middleware' => ['web']], function () {
+    //
 });*/

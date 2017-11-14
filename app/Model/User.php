@@ -39,6 +39,9 @@ class User extends Authenticatable
             return true;
           }
           abort(401, 'This action is unauthorized.');
+          // return redirect()->route('/');
+          //return redirect()->intended('/path_for_normal_user');
+          //return redirec()->back();
         }
     
     public function hasAnyRole($roles)
