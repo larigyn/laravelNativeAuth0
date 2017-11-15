@@ -15,9 +15,11 @@ class SuperAdminController extends Controller
         // $this->middleware('checkrole:super');
     }
 
-    public function index()
+    public function index(/*$param*/)
     {
-        
+        // $post = Post::where('id', $param)
+        //     ->orWhere('slug', $param)
+        //     ->firstOrFail();
         return view('super.home_superadmin');
 
     }
@@ -86,5 +88,10 @@ class SuperAdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getRouteKeyName()
+    {
+    return 'slug';
     }
 }

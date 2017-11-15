@@ -90,4 +90,9 @@ class AdminController extends Controller
     {
         //
     }
+    
+    public function getRouteKeyName()
+    {
+    return 'slug';
+    }
 }

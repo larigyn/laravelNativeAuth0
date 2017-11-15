@@ -90,4 +90,9 @@ class OfficerController extends Controller
     {
         //
     }
+
+    public function getRouteKeyName()
+    {
+    return 'slug';
+    }
 }
