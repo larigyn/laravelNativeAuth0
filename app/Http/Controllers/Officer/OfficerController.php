@@ -10,8 +10,8 @@ class OfficerController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'checkrole:officer']);
-        // $this->middleware('checkrole:officer');
+        // $this->middleware(['auth', 'checkrole:officer']);
+        $this->middleware('checkrole:officer');
     }
 
     /**

@@ -11,17 +11,14 @@ class SuperAdminController extends Controller
     
     public function __construct()
     {
-        $this->middleware(['auth','checkrole:super']);
-        // $this->middleware('checkrole:super');
+        // $this->middleware(['preventBackHistory','checkrole:super']);
+        // $this->middleware('auth');
+        $this->middleware('checkrole:super');
     }
 
-    public function index(/*$param*/)
+    public function index()
     {
-        // $post = Post::where('id', $param)
-        //     ->orWhere('slug', $param)
-        //     ->firstOrFail();
         return view('super.home_superadmin');
-
     }
 
     /**

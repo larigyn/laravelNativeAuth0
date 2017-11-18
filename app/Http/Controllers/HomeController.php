@@ -14,6 +14,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('preventBackHistory');
 
     }
 
@@ -37,10 +38,6 @@ class HomeController extends Controller
         if($request->user()->hasRole('officer'))
             {
                 return redirect()->route('officer.index');
-            }
-        if($request->user()->hasRole('guest'))
-            {
-                return redirect()->route('guest.index');
             }
                 // return redirect()->intended('/welcome');
                 return redirect()->back();

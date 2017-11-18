@@ -5,18 +5,18 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image; // alternative for the use Image;
+// use Image;
+use File;
+
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function __construct()
     {
-        $this->middleware(['auth','checkrole:admin']);
-        // $this->middleware('checkrole:admin');
+        // $this->middleware(['auth','checkrole:admin']);
+        $this->middleware('checkrole:admin');
     }
 
     public function index()
@@ -90,7 +90,39 @@ class AdminController extends Controller
     {
         //
     }
+
+    public function showProfile()
+    {
+        //
+        return view('admin.profile_admin', array('user' => Auth::user() ));
+    }
     
+    public function update_avatar(Request $request){
+        
+        // delete users old image add this before uplading the new image. Remember to add "use File; on the top of the controller"
+         if (Auth::user()->avatar != "default.jpg") {
+             $path = '/uploads/avatar/';
+             $lastpath= Auth::user()->avatar;
+             File::Delete(public_path( $path . $lastpath) );
+ 
+            }
+            
+        // Logic for user upload of avatar
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatar/' . $filename ) );
+
+            $user = Auth::user();
+            $user->avatar = $filename;
+            $user->save();
+            
+        }
+ 
+        return view('admin.profile_admin', array('user' => Auth::user()) );
+ 
+    }
+
     public function getRouteKeyName()
     {
     return 'slug';

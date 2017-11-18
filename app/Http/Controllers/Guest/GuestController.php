@@ -15,8 +15,8 @@ class GuestController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'checkrole:guest']);
-        // $this->middleware('checkrole:guest');
+        // $this->middleware(['auth', 'checkrole:guest']);
+        $this->middleware('checkrole:guest');
     }
 
     public function index()
